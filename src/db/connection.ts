@@ -1,4 +1,6 @@
 import { Sequelize } from 'sequelize';
+import { readdirSync } from 'fs';
+import { join } from 'path';
 
 class Connection extends Sequelize {
 
@@ -32,6 +34,32 @@ class Connection extends Sequelize {
         }
     }
 
+    public async createAllTables() {
+            this.dbModels.forEach( async (model: any) => {
+                await this.getQueryInterface().createTable(model.modelName, {...model.modelStructure});
+            })
+    }
+
+    public async modifyTables() {
+        
+    }
+
+    private get dbModels (): any[] {
+        console.log('Hola')
+        const modelsDir = (join(__dirname, '../models'));
+        const modelFiles = readdirSync((modelsDir));
+        console.log(modelFiles);
+        let models = [];
+
+        for(let file of modelFiles){
+            const modelPath = join(modelsDir, file);
+            console.log('REQUIRED MODEL: \n', require(modelPath));
+            const { modelName, modelStructure } = require(modelPath);
+            models.push({modelName, modelStructure});
+            console.log(modelName)
+        }
+        return models;
+    }
 
 }
 

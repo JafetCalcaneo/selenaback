@@ -16,6 +16,10 @@ export const User = connection.define('User', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    userType: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     password: {
         type: DataTypes.STRING,
         allowNull: false

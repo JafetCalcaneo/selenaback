@@ -1,6 +1,4 @@
 import { DataTypes, Sequelize } from 'sequelize';
-import type { Migration } from '../umzug';
-import connection from '../connection';
 
 export const up = async (sequelize: Sequelize, modelName: string, modelStructure: any) => {
     console.log(`Sequelize: ====>> ${sequelize}, Type: ${typeof sequelize}`);
