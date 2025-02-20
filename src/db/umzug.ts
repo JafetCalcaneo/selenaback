@@ -1,16 +1,18 @@
 import connection from './connection';
 import { Nail } from '../models/nail.model';
-import { CatNail } from '../models/catNail.model';
+import { CatNail } from '../models/CatNail.model';
+import { User } from '../models/user.model';
+import { CatUser } from '../models/CatUser.model';
 
 const command = process.argv[2]
 
-Nail.belongsTo(CatNail, {
-    foreignKey: 'NailTypeId',
-});
-CatNail.hasMany(Nail, {
-    foreignKey: 'NailTypeId',
-});
+// Nail.belongsTo(CatNail);
+// CatNail.hasMany(Nail);
 
+// User.belongsTo(CatUser);
+// CatUser.hasMany(User);
+
+// connection.getQueryInterface().dropAllTables();
 
 
 switch(command) {
@@ -18,7 +20,7 @@ switch(command) {
         connection.createAllTables();
         break;
     case 'modify':
-        connection.modifyTables();
+        connection.modifyTable();
         break;
     default:
         console.log('Flag not given, try with:\n "create" \n "modify"');

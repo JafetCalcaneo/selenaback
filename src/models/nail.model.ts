@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import connection from '../db/connection';
-import { CatNail } from './catNail.model';
+import { CatNail } from './CatNail.model';
 
 export const Nail = connection.define('Nail', {
     id: {
@@ -21,13 +21,16 @@ export const Nail = connection.define('Nail', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    typeId: {
+    nailType: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: CatNail,
             key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+
     }
 });
 

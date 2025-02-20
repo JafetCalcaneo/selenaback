@@ -1,5 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
 import connection from "../db/connection";
+import { CatUser } from "./CatUser.model";
 
 export const User = connection.define('User', {
     id: {
@@ -18,7 +19,13 @@ export const User = connection.define('User', {
     },
     userType: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: CatUser,
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
     },
     password: {
         type: DataTypes.STRING,

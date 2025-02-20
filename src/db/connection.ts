@@ -40,23 +40,21 @@ class Connection extends Sequelize {
             })
     }
 
-    public async modifyTables() {
-        
+    public async modifyTable() {
+        this.dbModels.forEach(async (model: any) => {
+            console.log(Object.keys(model.modelStructure))
+        });
     }
 
     private get dbModels (): any[] {
-        console.log('Hola')
         const modelsDir = (join(__dirname, '../models'));
         const modelFiles = readdirSync((modelsDir));
-        console.log(modelFiles);
         let models = [];
 
         for(let file of modelFiles){
             const modelPath = join(modelsDir, file);
-            console.log('REQUIRED MODEL: \n', require(modelPath));
             const { modelName, modelStructure } = require(modelPath);
             models.push({modelName, modelStructure});
-            console.log(modelName)
         }
         return models;
     }
