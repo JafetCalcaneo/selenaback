@@ -1,3 +1,4 @@
+import { modelStructure } from './../models/user.model';
 import { Sequelize } from 'sequelize';
 import { readdirSync } from 'fs';
 import { join } from 'path';
@@ -41,8 +42,13 @@ class Connection extends Sequelize {
     }
 
     public async modifyTable() {
-        this.dbModels.forEach(async (model: any) => {
-            console.log(Object.keys(model.modelStructure))
+        this.dbModels.forEach(async (model: any, i: number) => {
+            const keys = Object.keys(model.modelStructure)
+            const values: any[] = Object.values(model.modelStructure)
+
+            console.log(values[0].type)
+            // console.log(Object.values(model.modelStructure))
+            // await this.getQueryInterface().addColumn(model.modelName, values[i].type)
         });
     }
 

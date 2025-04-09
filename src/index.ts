@@ -2,7 +2,9 @@ import express, { Request, Response } from 'express';
 import 'dotenv/config';
 import user from './router/user.router';
 import login from './router/login.router';
+import nail from './router/nail.router';
 import cors from 'cors';
+import path from 'path';
 
 const app = express();
 
@@ -14,6 +16,8 @@ app.use(cors());
 //Routes
 app.use('/user', user);
 app.use('/auth', login);
+app.use('/nail', nail);
+app.use('/public', express.static(path.join(__dirname, '../public')));
 
 const PORT = process.env.PORT;
 

@@ -21,6 +21,10 @@ export const Nail = connection.define('Nail', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     nailType: {
         type: DataTypes.INTEGER,
         allowNull: false,
