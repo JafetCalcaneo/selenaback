@@ -2,6 +2,7 @@ import { modelStructure } from './../models/user.model';
 import { Sequelize } from 'sequelize';
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import 'dotenv/config';
 
 class Connection extends Sequelize {
 
@@ -10,7 +11,7 @@ class Connection extends Sequelize {
 
 
     private constructor() {
-        super('postgres://postgres:1234@localhost:5432/selenadb');
+        super(process.env.DATABASE_URL!);
     }
 
     public static get instance() {
@@ -20,7 +21,6 @@ class Connection extends Sequelize {
     public async connect() {
         try {
             await this.authenticate();
-            console.log('Conexion exitosa');
         } catch(error) {
             console.log('Error en la conexion\n', error);
         }
@@ -29,7 +29,6 @@ class Connection extends Sequelize {
     public async disconnect() {
         try {
             await this.close();
-            console.log('Desconexion exitosa');
         } catch(error) {
             console.log('Error en la desconexion\n', error);
         }
@@ -46,7 +45,7 @@ class Connection extends Sequelize {
             const keys = Object.keys(model.modelStructure)
             const values: any[] = Object.values(model.modelStructure)
 
-            console.log(values[0].type)
+            // console.log(values[0].type)
             // console.log(Object.values(model.modelStructure))
             // await this.getQueryInterface().addColumn(model.modelName, values[i].type)
         });

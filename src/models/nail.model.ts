@@ -38,5 +38,15 @@ export const Nail = connection.define('Nail', {
     }
 });
 
+
+Nail.belongsTo(CatNail, {
+    foreignKey: 'nailType',
+    as: 'category'
+});
+
+CatNail.hasMany(Nail, {
+    foreignKey: 'nailType',
+});
+
 export const modelStructure = Nail.rawAttributes;
 export const modelName = Nail.getTableName();

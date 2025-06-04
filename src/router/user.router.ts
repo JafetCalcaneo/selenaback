@@ -8,7 +8,6 @@ router.get('/all', async (req: Request, res: Response) => {
     res.json({message: 'Enviando todos los usuarios',
         header: req.headers
     });
-    console.log(req.headers);
 
 });
 
